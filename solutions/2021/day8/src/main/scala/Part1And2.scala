@@ -72,48 +72,6 @@ object DisplayUnJumbleDevice {
 
     updatedPossibilities
   }
-
-
-  // out of all possibilities, find the one that is uniquely (missing a specific display element) + (has a specific
-  // number of signals)
-  private def findOddBall(choices: Map[DisplayPattern, Set[Int]], signalCount: Int): DisplayPattern = {
-    SignalWire.values.foreach(signal => {
-      println(f"seeking $signal")
-      val missingSignal = choices
-        .keys
-        .filter(p => {
-          if (p.signals.size == signalCount) {
-            !p.signals.contains(signal)
-          } else {
-            true
-          }
-        })
-
-      if (missingSignal.size == 1) {
-        println("~~~ found")
-        //        return missingSignal.head
-      }
-    })
-
-    println("---")
-
-    throw new IllegalStateException()
-  }
-
-  private def updateWithFinding(choices: Map[DisplayPattern, Set[Int]], pattern: DisplayPattern, value: Int): Map[DisplayPattern, Set[Int]] = {
-    println(f"identified $value")
-
-    var newChoices = choices
-    choices.keys.foreach(p => {
-      if (pattern != p) {
-        newChoices = newChoices + (p -> (choices(p) - value))
-      }
-    })
-
-    newChoices = newChoices + (pattern -> Set(value))
-    newChoices
-
-  }
 }
 
 
