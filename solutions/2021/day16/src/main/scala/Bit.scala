@@ -1,4 +1,4 @@
-class Bit private (isFlipped: Boolean) {
+class Bit private(isFlipped: Boolean) {
   override def toString: String = if (isFlipped) {
     "1"
   } else {
@@ -32,13 +32,13 @@ object Bit {
     }
   }
 
-  def toInt(bits: Array[Bit]): Int = {
-    var sum = 0
+  def toBigInt(bits: Array[Bit]): BigInt = {
+    var sum = BigInt(0)
     for (x <- bits.reverse.zipWithIndex) {
       val bit = x._1
       val index = x._2
       bit match {
-        case ONE => sum = sum + (1 << index)
+        case ONE => sum = sum + (BigInt(1) << index)
         case ZERO =>
       }
     }
